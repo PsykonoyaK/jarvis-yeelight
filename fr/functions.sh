@@ -14,7 +14,7 @@
 #        i_check) echo "Je regarde...";;
 #        the_answer_is) echo "La réponse est $2";;
 #    esac
-#} 
+#}
 
 jv_pg_yl_lang()
 {
