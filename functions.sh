@@ -1,77 +1,123 @@
 #!/bin/bash
-jv_pg_ww_check_weather () {
-	say $var_jv_pg_yl_ip2
-}
-# $1: zone id
-# $2 (return value): zone name
-jv_pg_yl_zone_id_to_zone_name ()
+
+zone_name=""
+
+dump_zone () 
 {
-  case "$1" in
-    0) eval "$2='$var_jv_pg_yl_all_zone_name'";;
-    1) eval "$2='$var_jv_pg_yl_zone_1_name'";;
-    2) eval "$2='$var_jv_pg_yl_zone_2_name'";;
-    3) eval "$2='$var_jv_pg_yl_zone_3_name'";;
-    4) eval "$2='$var_jv_pg_yl_zone_4_name'";;
-    *) jv_error "Error: Zone ID '$1' does not exist, don't use it in command file!";;
-  esac
+  echo ${jv_zones["$1"]} 
 }
 
-# $1: zone id
-# $2 (bool, optional): Silent ("True" for no Jarvis response, "False" or no value for Jarvis response)
-#
-# return (int): 0 if success, 1 if failed
-jv_pg_yl_turnOnAndWhite ()
+dump_couleur () 
 {
-  # Send request to milight module
-  #local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  #local result=`python3 $dir/MilightWifiBridge/MilightWifiBridge.py --ip $var_jv_pg_yl_ip --port $var_jv_pg_yl_port --timeout $var_jv_pg_yl_request_timeout_in_sec --zone $1 --turnOn --setWhiteMode`
-  bulb2.turn_on()
-  # Show the result to user (if requested)
-  if [[ $result == "" ]]; then
-    if [[ ! $2 =~ "True" ]]; then
-      say "$(jv_pg_yl_lang turn_on_success $1)"
-    fi
-    return 0
-  else
-    if [[ ! $2 =~ "True" ]]; then
-      say "$(jv_pg_yl_lang turn_on_failed $1)"
-    fi
+  echo "mlmlml $1"
+  echo ${jv_couleurs["$1"]} 
+}
+
+# $1: yee command to exec
+# $2: bulb ip
+# $3: color_name/brightness (string/number, optional)
+jv_pg_exec_yl_command()
+{
+  # Send request to yeelight module
+  #say $dir #path to jarvis_yeelight
+  local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"       
+  python $dir/yeecli/cli.py --ip=$2 $1 $3 2> /dev/null                     
+  return $?  
+}
+
+# $1: command
+# $2: zone_name
+# $3: color_name/brightness (string/number, optional)
+# return (int): 0 if success, 1 if failed
+jv_pg_yl_command ()
+{   
+  local cmd="$1"
+  local zone="$2"
+  local color_or_brightness="$3"
+
+  ret=0
+  if [ "$3" != "" ]
+  then
+    color_or_brightness=dump_zone "$color_or_brightness"
   fi
 
+  for ip in `dump_zone $zone`
+  do
+    jv_pg_exec_yl_command "$cmd" "$ip" "$color_or_brightness"
+    if [[ "$?" -gt "0" ]]
+    then
+      ret=1
+      break
+    fi
+  done 
+
+  if [[ "$ret" -eq "0" ]]
+  then
+      say "$(jv_pg_yl_lang "$cmd" "success" "$zone")"
+  else
+      say "$(jv_pg_yl_lang "$cmd" "failed" "$zone")"
+      break
+  fi    
   return 1
 }
 
-# $1: zone id
+# $1: zone name
 # $2 (bool, optional): Silent ("True" for no Jarvis response, "False" or no value for Jarvis response)
 #
 # return (int): 0 if success, 1 if failed
-jv_pg_yl_turnOff ()
-{
-  say "hello"
-  # Send request to milight module
-  #local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  #local result=`python3 $dir/MilightWifiBridge/MilightWifiBridge.py --ip $var_jv_pg_m3_ip --port $var_jv_pg_m3_port --timeout $var_jv_pg_m3_request_timeout_in_sec --zone $1 --setWhiteMode --turnOff`
+# jv_pg_yl_turnOnAndWhite ()
+# {
+#   # Send request to yeelight module
+#   local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#   #say $dir #path to jarvis_yeelight
+#   local result=`python $dir/yeecli/cli.py --ip=$var_jv_pg_yl_ip2 turn on`
   
-  echo var_jv_pg_yl_ip1
-  from yeelight import Bulb
+#   # Show the result to user (if requested)
+#   if [[ $result == "Turn on" ]]; then
+#     if [[ ! $2 =~ "True" ]]; then
+#       say "$(jv_pg_yl_lang turn_on_success $1)"
+#     fi
+#     return 0
+#   else
+#     if [[ ! $2 =~ "True" ]]; then
+#       say "$(jv_pg_yl_lang turn_on_failed $1)"
+#     fi
+#   fi
 
-  bulb1 = Bulb(var_jv_pg_yl_ip1)
-  bulb2 = Bulb(var_jv_pg_yl_ip2)
-  bulb3 = Bulb(var_jv_pg_yl_ip3)
+#   return 1
+# }
 
-  local result=`python bulb2.turn_off()`
+# $1: zone name
+# $2 (bool, optional): Silent ("True" for no Jarvis response, "False" or no value for Jarvis response)
+#
+# return (int): 0 if success, 1 if failed
+# jv_pg_yl_turnOff ()
+# { 
   
-  # Show the result to user (if requested)
-  if [[ $result == "" ]]; then
-    if [[ ! $2 =~ "True" ]]; then
-      say "$(jv_pg_yl_lang turn_off_success $1)"
-    fi
-    return 0
-  else
-    if [[ ! $2 =~ "True" ]]; then
-      say "$(jv_pg_yl_lang turn_off_failed $1)"
-    fi
-  fi
+#   #say $var_jv_pg_yl_ip2
+#   # Send request to yeelight module
+#   local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#   #say $dir #path to jarvis_yeelight
+#   for ips in `dump_zone $1`
+#   do
+#     local result=`python $dir/yeecli/cli.py --ip=$ips turn off 2> /dev/null`
+#   done
+#   #local result="Turning the bulb off..."
+#   echo "----------> $result"
+#   # Show the result to user (if requested)
+#   if [[ $result == "Turning the bulb off..." ]]; then
+#     if [[ ! $2 =~ "True" ]]; then
+#       say "$(jv_pg_yl_lang turn_off_success $1)"
+#     fi
+#     return 0
+#   else
+#     if [[ ! $2 =~ "True" ]]; then
+#       say "$(jv_pg_yl_lang turn_off_failed $1)"
+#     fi
+#   fi
 
-  return 1
-}
+#   return 1
+# }
+
+
+
