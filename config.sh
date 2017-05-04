@@ -1,11 +1,11 @@
 [salon]
-var_jv_pg_yl_ip1="192.168.1.25" # Yeelight IP
-var_jv_pg_yl_ip2="192.168.1.61" # Yeelight IP
+var_jv_pg_yl_ip1="192.168.1.61" # Yeelight IP
+var_jv_pg_yl_ip2="192.168.1.75" # Yeelight IP
 effect=smooth
 duration=500
 
 [chambre]
-var_jv_pg_yl_ip3="192.168.1.75" # Yeelight IP
+var_jv_pg_yl_ip3="192.168.1.25" # Yeelight IP
 effect=smooth
 duration=500
 
@@ -17,6 +17,7 @@ var_jv_pg_yl_zone_1_name="salon" # Name of the zone 1
 var_jv_pg_yl_zone_2_name="chambre" # Name of the zone 2
 
 declare -A jv_couleurs=(
+  ["blanc"]="ffffff"
   ["rouge"]="ff0000" 
   ["vert"]="00ff00" 
   ["bleu"]="0000ff"

@@ -3,10 +3,16 @@
 
 *ALLUME*SALON*==jv_pg_yl_command "turn on" salon
 *ETEIN*SALON*==jv_pg_yl_command "turn off" salon
+*SALON*BLANC*==jv_pg_yl_command "rgb" salon blanc
+*SALON*ROUGE*==jv_pg_yl_command "rgb" salon rouge
+*SALON*VERT*==jv_pg_yl_command "rgb" salon vert
+*SALON*BLEU*==jv_pg_yl_command "rgb" salon bleu
 
 *ALLUME*CHAMBRE*==jv_pg_yl_command "turn on" chambre
 *ETEIN*CHAMBRE*==jv_pg_yl_command "turn off" chambre
 *AUGMENTE*LUMIERE*CHAMBRE*==jv_pg_yl_command "brightness" chambre 100
 *ADOUCI*LUMIERE*CHAMBRE*==jv_pg_yl_command "brightness" chambre 30
+
+*CHAMBRE*BLANCHE*==jv_pg_yl_command "rgb" chambre blanc
 *CHAMBRE*VERT*==jv_pg_yl_command "rgb" chambre vert
 

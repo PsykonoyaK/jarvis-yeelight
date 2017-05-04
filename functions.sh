@@ -9,7 +9,6 @@ dump_zone ()
 
 dump_couleur () 
 {
-  echo "mlmlml $1"
   echo ${jv_couleurs["$1"]} 
 }
 
@@ -20,8 +19,9 @@ jv_pg_exec_yl_command()
 {
   # Send request to yeelight module
   #say $dir #path to jarvis_yeelight
-  local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"       
-  python $dir/yeecli/cli.py --ip=$2 $1 $3 2> /dev/null                     
+  local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  python $dir/yeecli/cli.py --ip=$2 $1 $3 2> /dev/null         
+  #python $dir/yeecli/cli.py --ip=$2 $1       
   return $?  
 }
 
@@ -38,7 +38,7 @@ jv_pg_yl_command ()
   ret=0
   if [ "$3" != "" ]
   then
-    color_or_brightness=dump_zone "$color_or_brightness"
+    color_or_brightness=`dump_couleur $color_or_brightness`
   fi
 
   for ip in `dump_zone $zone`
