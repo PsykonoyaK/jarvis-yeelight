@@ -2,7 +2,7 @@
 Control wireless Yeelights with <a target="_blank" href="http://domotiquefacile.fr/jarvis/">Jarvis assistant</a>.
 
 
-<img src="https://raw.githubusercontent.com/PsykonoyaK/jarvis-yeelight/master/yeelight.jpg" width="400">
+<img src="https://raw.githubusercontent.com/PsykonoyaK/jarvis-yeelight/master/yeelight.jpg" width="00">
 
 
 ## Usage
