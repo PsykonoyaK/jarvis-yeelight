@@ -1,3 +1,16 @@
-*POPO*==say "$(jv_pg_ww_check_weather)"
-*ALLUME*SALON*==jv_pg_yl_turnOnAndWhite 1
-*ETEIN*SALON*==jv_pg_yl_turnOff 1
+# (1) : zone (lounge, bedroom...)
+*TURN*ON* (*)==jv_pg_yl_command "turn on" (1)
+*TURN*OFF* (*)==jv_pg_yl_command "turn off" (1)
+
+# (1) : zone
+# (2) : color
+*AMBIENCE* (*) *IN* (*)==jv_pg_yl_command "rgb" (1) (2)
+
+# (1) : zone
+# (2) : brightness (0-100)
+*INCREASE*BRIGHTNESS* (*)==jv_pg_yl_command "brightness" (1) 100
+*DECREASE*BRIGHTNESS* (*)==jv_pg_yl_command "brightness" (1) 30
+*CHANGE*BRIGHTNESS* (*) (*)==jv_pg_yl_command "brightness" (1) (2)
+
+
+*ALERT*MODE* (*)==jv_pg_yl_command "pulse" (1)

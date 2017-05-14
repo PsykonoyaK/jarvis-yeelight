@@ -18,9 +18,8 @@
 
 jv_pg_yl_lang()
 {
-	
   # "$1" : $cmd
-  # "$2" : success 
+  # "$2" : success
   # "$3" : zone
   cmd="$1"
   result="$2"
@@ -29,19 +28,25 @@ jv_pg_yl_lang()
   # Success casee
   if [[ "$result" == "success" ]]
     then
-  	  case "$1" in
-      "turn on") echo "La zone $zone éclairée";;
-      "turn off") echo "La zone $zone éteinte";;
-      "rgb") echo "La zone $zone a changé de couleur d'ambiance";;
-  		*) jv_error "Erreur: Clef de traduction '$1' non reconnue. Merci de contacter le concepteur de ce plugin.";;
-  	  esac
+      case "$1" in
+		"turn on") echo "La zone $zone éclairée";;
+		"turn off") echo "La zone $zone éteinte";;
+     	"rgb") echo "La zone $zone a changé de couleur d'ambiance";;
+     	"brightness") echo "J'ai changé la luminosité de la zone $zone";;
+		"pulse") echo "La zone $zone est en mode alerte";;
+		"disco") echo "C'est ambiance disco dans la zone $zone";;
+		*) jv_error "Erreur: Clef de traduction '$1' non reconnue. Merci de contacter le concepteur de ce plugin.";;
+      esac
     # Failed case
     else
-  	  case "$1" in
-      "turn on") echo "Je n'arrive pas à allumer la zone $zone";;
-      "turn off") echo "Je n'arrive pas à éteindre la zone $zone";;
-      "rgb") echo "Je n'ai pas pu changer la couleur d'ambiance dans la zone $zone";;
-  		*) jv_error "Erreur: Clef de traduction '$1' non reconnue. Merci de contacter le concepteur de ce plugin.";;
-  	  esac
+      case "$1" in
+      	"turn on") echo "Je n'arrive pas à allumer la zone $zone";;
+      	"turn off") echo "Je n'arrive pas à éteindre la zone $zone";;
+      	"rgb") echo "Je n'ai pas réussi à changer la couleur d'ambiance dans la zone $zone";;
+      	"brightness") echo "Je n'ai pas réussi à changer la luminosité de la zone $zone";;
+      	"pulse") echo "Je n'ai pas réussi à alerter la zone $zone";;
+      	"disco") echo "Je n'ai pas réussi à lancer le mode disco dans la zone $zone";;
+		*) jv_error "Erreur: Clef de traduction '$1' non reconnue. Merci de contacter le concepteur de ce plugin.";;
+      esac
   fi
 }

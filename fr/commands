@@ -1,18 +1,19 @@
-*ALLUME*MAISON*==jv_pg_yl_command "turn on" maison
-*ETEIN*MAISON*==jv_pg_yl_command "turn off" maison
+# (1) : zone (salon, chambre...)
+*ALLUME* (*)==jv_pg_yl_command "turn on" (1)
+*ETEIN* (*)==jv_pg_yl_command "turn off" (1)
 
-*ALLUME*SALON*==jv_pg_yl_command "turn on" salon
-*ETEIN*SALON*==jv_pg_yl_command "turn off" salon
-*SALON*BLANC*==jv_pg_yl_command "rgb" salon blanc
-*SALON*ROUGE*==jv_pg_yl_command "rgb" salon rouge
-*SALON*VERT*==jv_pg_yl_command "rgb" salon vert
-*SALON*BLEU*==jv_pg_yl_command "rgb" salon bleu
+# (1) : zone 
+# (2) : couleur 
+*AMBIANCE* (*) *EN* (*)==jv_pg_yl_command "rgb" (1) (2)
 
-*ALLUME*CHAMBRE*==jv_pg_yl_command "turn on" chambre
-*ETEIN*CHAMBRE*==jv_pg_yl_command "turn off" chambre
-*AUGMENTE*LUMIERE*CHAMBRE*==jv_pg_yl_command "brightness" chambre 100
-*ADOUCI*LUMIERE*CHAMBRE*==jv_pg_yl_command "brightness" chambre 30
+# (1) : zone 
+# (2) : lumnosité (0-100)
+*AUGMENTE*LUMINOSITE* (*)==jv_pg_yl_command "brightness" (1) 100
+*BAISSE*LUMINOSITE* (*)==jv_pg_yl_command "brightness" (1) 30
+*CHANGE*LUMINOSITE* (*) (*)==jv_pg_yl_command "brightness" (1) (2)
 
-*CHAMBRE*BLANCHE*==jv_pg_yl_command "rgb" chambre blanc
-*CHAMBRE*VERT*==jv_pg_yl_command "rgb" chambre vert
+
+*MODE*ALERTE* (*)|*ACTIVE*ALERTE* (*)==jv_pg_yl_command "pulse" (1)
+
+*AMBIANCE*DISCO* (*)|*MODE*DISCO* (*)==jv_pg_yl_command "disco" (1)
 
