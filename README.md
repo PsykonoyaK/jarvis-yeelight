@@ -14,22 +14,22 @@ You: Eteins le salon/chambre/maison
 Jarvis: La zone salon/chambre/maison est éteinte
 
 You: Change l'ambiance du salon/chambre/maison en bleu/rouge/...
-Jarvis: La zone $zone a changé de couleur d'ambiance
+Jarvis: La zone salon/chambre/maison a changé de couleur d'ambiance
 
 You: Augmente la luminosité du salon/chambre/maison
-Jarvis: J'ai changé la luminosité de la zone $zone
+Jarvis: J'ai changé la luminosité de la zone salon/chambre/maison
 
 You: Baisse la luminosité du salon/chambre/maison
-Jarvis: J'ai changé la luminosité de la zone $zone
+Jarvis: J'ai changé la luminosité de la zone salon/chambre/maison
 
 You: Change la luminosité du salon/chambre/maison à 50%
-Jarvis: J'ai changé la luminosité de la zone $zone
+Jarvis: J'ai changé la luminosité de la zone salon/chambre/maison
 
 You: Active l'alerte dans le salon/chambre/maison
-Jarvis: La zone $zone est en mode alerte
+Jarvis: La zone salon/chambre/maison est en mode alerte
 
 You: Active l'alerte dans le salon/chambre/maison
-Jarvis: C'est ambiance disco dans la zone $zone
+Jarvis: C'est ambiance disco dans la zone salon/chambre/maison
 
 ```
 
